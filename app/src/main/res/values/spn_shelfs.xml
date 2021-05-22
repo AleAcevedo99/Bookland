@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="shelfs">
+        <item>Seleccionar</item>
+    </string-array>
+    <string-array name="person">
+        <item>@string/txt_select</item>
+        <item>@string/txt_first_person</item>
+        <item>@string/txt_third_person</item>
+    </string-array>
+    <string-array name="ageType">
+        <item>@string/txt_select</item>
+        <item>@string/txt_adult</item>
+        <item>@string/txt_ya</item>
+        <item>@string/txt_na</item>
+        <item>@string/txt_children</item>
+    </string-array>
+</resources>
