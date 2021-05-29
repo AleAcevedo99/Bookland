@@ -43,7 +43,7 @@ class LogInActivity : AppCompatActivity() {
                                 val jsonObject = JSONObject(response)
                                 if(jsonObject["code"].toString().toLong() >= 1){
                                     cleanForm()
-                                    val intent = Intent(this@LogInActivity, HomeActivity::class.java).apply{
+                                    val intent = Intent(this@LogInActivity, MainActivity::class.java).apply{
                                         putExtra(Constants.ID_USER, jsonObject["code"].toString().toLong())
                                     }
                                     startActivity(intent)

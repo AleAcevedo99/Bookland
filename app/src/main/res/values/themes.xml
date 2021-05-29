@@ -9,8 +9,22 @@
         <item name="colorSecondary">@color/secondary_btn</item>
         <item name="colorSecondaryVariant">@color/secondary_btn</item>
         <item name="colorOnSecondary">@color/white</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
+    </style>
+    <style name="Theme.PopupOverlay.Menu" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="Theme.Bookland.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
 </resources>

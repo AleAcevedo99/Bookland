@@ -1,9 +1,11 @@
-package com.example.bookland
+package com.example.bookland.Fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,43 +14,46 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.bookland.Adapters.MyShelfsAdapter
 import com.example.bookland.Adapters.RecommendationsAdapter
 import com.example.bookland.Constants.Constants
 import com.example.bookland.Entity.EntityGender
-import com.example.bookland.Entity.EntityShelf
-import com.example.bookland.databinding.ActivityHomeBinding
-import com.example.bookland.databinding.ActivityRecommendationsBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.bookland.R
+import com.example.bookland.databinding.FragmentHomeBinding
+import com.example.bookland.databinding.FragmentRecommendationsBinding
 import org.json.JSONObject
 import java.util.*
 
-class RecommendationsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRecommendationsBinding
-    private var idUser: Long = -1
-    private lateinit var queue: RequestQueue
-    private val url= Constants.URL_API + "FavoriteGendersPerUser/"
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ID_USER = Constants.ID_USER
+private lateinit var queue: RequestQueue
+private val url= Constants.URL_API + "FavoriteGendersPerUser/"
+
+class RecommendationsFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var idUser: Long? = null
+    private var _binding: FragmentRecommendationsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityRecommendationsBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        supportActionBar?.setTitle(R.string.txt_recommendations)
-
-        queue = Volley.newRequestQueue(this)
-        idUser= intent.getLongExtra(Constants.ID_USER, -1)
-        loadMyGendersList()
+        arguments?.let {
+            idUser = it.getLong(ID_USER, -1)
+        }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        if(idUser > -1){
-            loadMyGendersList()
-        }else{
-            Toast.makeText(this@RecommendationsActivity, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
-            finish()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentRecommendationsBinding.inflate(inflater, container, false)
+        queue = Volley.newRequestQueue(context)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadMyGendersList()
     }
 
     fun loadMyGendersList(){
@@ -75,28 +80,38 @@ class RecommendationsActivity : AppCompatActivity() {
                         actionDialog().show()
                     }
 
-                    val adapter = RecommendationsAdapter(list, this@RecommendationsActivity)
+                    val adapter = RecommendationsAdapter(list, context!!)
 
-                    val linearLayout = LinearLayoutManager(this@RecommendationsActivity, LinearLayoutManager.VERTICAL,
+                    val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,
                             false)
                     binding.rvGenders.layoutManager = linearLayout
                     binding.rvGenders.adapter = adapter
                 },
                 Response.ErrorListener { error ->
-                    Toast.makeText(this, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
                 })
         queue.add(stringRequest)
 
     }
 
     fun actionDialog(): AlertDialog {
-        val alert = AlertDialog.Builder(this)
+        val alert = AlertDialog.Builder(context!!)
         alert.setTitle(R.string.app_name)
         alert.setMessage(R.string.txt_configure_fav_genders)
 
-        alert.setPositiveButton(R.string.txt_yes){_,_ ->
+        alert.setPositiveButton(R.string.txt_yes){ _, _ ->
 
         }
         return  alert.create()
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(idUser: Long) =
+            RecommendationsFragment().apply {
+                arguments = Bundle().apply {
+                    putLong(ID_USER, idUser)
+                }
+            }
     }
 }

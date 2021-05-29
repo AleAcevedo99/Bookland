@@ -13,12 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bookland">
-        <activity android:name=".AboutUsActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Bookland.NoActionBar">
+        </activity>
+        <activity android:name=".AboutUsActivity" />
         <activity android:name=".AdvancedSearchResultsActivity" />
         <activity android:name=".BookShelfsActivity" />
-        <activity android:name=".AdvancedSearchActivity" />
         <activity android:name=".CatalogShelfsActivity" />
-        <activity android:name=".RecommendationsActivity" />
         <activity android:name=".BookDetailActivity" />
         <activity android:name=".ShelfActivity" />
         <activity android:name=".FavoriteAuthorsActivity" />

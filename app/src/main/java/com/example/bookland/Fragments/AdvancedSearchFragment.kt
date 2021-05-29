@@ -1,13 +1,13 @@
-package com.example.bookland
-
+package com.example.bookland.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -15,34 +15,50 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.bookland.Adapters.CheckAdapter
+import com.example.bookland.AdvancedSearchResultsActivity
 import com.example.bookland.Constants.Constants
 import com.example.bookland.Entity.EntityCheck
 import com.example.bookland.Entity.ListFilters
-import com.example.bookland.databinding.ActivityAdvancedSearchBinding
+import com.example.bookland.R
+import com.example.bookland.databinding.FragmentAdvancedSearchBinding
+import com.example.bookland.databinding.FragmentRecommendationsBinding
 import org.json.JSONObject
 import java.util.*
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ID_USER = Constants.ID_USER
 
-class AdvancedSearchActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAdvancedSearchBinding
+class AdvancedSearchFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var idUser: Long = -1
+    private var _binding: FragmentAdvancedSearchBinding? = null
     private lateinit var queue: RequestQueue
     private val url= Constants.URL_API + "Tags"
     private val urlGenders = Constants.URL_API + "Genders"
-
-
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityAdvancedSearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        arguments?.let {
+            idUser = it.getLong(ID_USER, -1)
+        }
+    }
 
-        val idUser= intent.getLongExtra(Constants.ID_USER, -1)
-        queue = Volley.newRequestQueue(this)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentAdvancedSearchBinding.inflate(inflater, container, false)
+        queue = Volley.newRequestQueue(context)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setFilterSettings()
         loadTags(idUser)
         loadGenders(idUser)
-
-
 
         binding.btnAdvacnedSearch.setOnClickListener {
             val filterSetting = ListFilters().getFilterSetting()
@@ -67,7 +83,7 @@ class AdvancedSearchActivity : AppCompatActivity() {
             filterSetting.minPage = if(binding.edtMin.text.isNotEmpty()) binding.edtMin.text.toString().toInt() else null
             filterSetting.maxPage = if(binding.edtMax.text.isNotEmpty()) binding.edtMax.text.toString().toInt() else null
             filterSetting.ageRange = binding.spnAgeType.selectedItemPosition
-            val intent = Intent(this, AdvancedSearchResultsActivity::class.java).apply{
+            val intent = Intent(context, AdvancedSearchResultsActivity::class.java).apply{
                 putExtra(Constants.ID_USER, idUser)
             }
             startActivity(intent)
@@ -124,19 +140,18 @@ class AdvancedSearchActivity : AppCompatActivity() {
                             }
                         }
                         val gendersSpinner = binding.spnGender
-                        gendersSpinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
+                        gendersSpinner.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_spinner_dropdown_item,
                                 gendersNames)
                         gendersSpinner.setSelection(genderPos)
                         val subGendersSpinner = binding.spnSubGender
-                        subGendersSpinner.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,
+                        subGendersSpinner.adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_spinner_dropdown_item,
                                 gendersNames)
                         subGendersSpinner.setSelection(subGenderPos)
                     }
 
                 },
                 Response.ErrorListener { error ->
-                    Toast.makeText(this, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
-                    finish()
+                    Toast.makeText(context, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
                 })
         queue.add(stringRequest)
 
@@ -168,17 +183,16 @@ class AdvancedSearchActivity : AppCompatActivity() {
                         }
                     }
 
-                    val adapter = CheckAdapter(list, this, 4, idUser, queue, 0)
+                    val adapter = CheckAdapter(list, context!!, 4, idUser, queue, 0)
                     val linearLayout = LinearLayoutManager(
-                            this, LinearLayoutManager.VERTICAL,
+                            context, LinearLayoutManager.VERTICAL,
                             false
                     )
                     binding.rvTags.layoutManager = linearLayout
                     binding.rvTags.adapter = adapter
                 },
                 Response.ErrorListener { error ->
-                    Toast.makeText(this, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
-                    finish()
+                    Toast.makeText(context, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
                 })
         queue.add(stringRequest)
     }
@@ -194,5 +208,13 @@ class AdvancedSearchActivity : AppCompatActivity() {
         binding.spnAgeType.setSelection(filterSetting.ageRange)
     }
 
-
+    companion object {
+        @JvmStatic
+        fun newInstance(idUser: Long) =
+            AdvancedSearchFragment().apply {
+                arguments = Bundle().apply {
+                    putLong(ID_USER, idUser)
+                }
+            }
+    }
 }

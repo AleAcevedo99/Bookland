@@ -8,6 +8,7 @@ class Constants{
         const val ID_BOOK = "IdBook"
         const val ID_GENDER = "IdGender"
         const val TYPE_BOOK_LIST = "TypeBookList"
+        const val SEARCH = "Search"
         const val URL_API = "http://10.0.0.5:8090/api/"
         const val LANGUAGE = "español"
         const val ID_SAGA = "IdSaga"

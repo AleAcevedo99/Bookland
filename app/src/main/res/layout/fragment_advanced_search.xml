@@ -6,11 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".Fragments.AdvancedSearchFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".AdvancedSearchActivity">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView8"
@@ -31,7 +34,6 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
@@ -183,5 +185,9 @@
             android:background="@color/secondary_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spnAgeType" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
 </ScrollView>

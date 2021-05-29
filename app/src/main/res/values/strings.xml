@@ -85,4 +85,7 @@
     <string name="txt_yes_string">Sí</string>
     <string name="txt_saga">Ver saga</string>
     <string name="txt_error_request">Ocurrió un problema al cargar los resultados</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_advanced_search">Búsqueda avanzada</string>
 </resources>

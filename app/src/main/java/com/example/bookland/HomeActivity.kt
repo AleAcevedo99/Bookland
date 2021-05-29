@@ -171,18 +171,6 @@ class HomeActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
-            R.id.itmRecommendations -> {
-                val intent = Intent(this, RecommendationsActivity::class.java).apply{
-                    putExtra(Constants.ID_USER, idUser)
-                }
-                startActivity(intent)
-            }
-            R.id.itmAdvancedSearch -> {
-                val intent = Intent(this, AdvancedSearchActivity::class.java).apply{
-                    putExtra(Constants.ID_USER, idUser)
-                }
-                startActivity(intent)
-            }
             R.id.itmAboutUs -> {
                 val intent = Intent(this, AboutUsActivity::class.java)
                 startActivity(intent)

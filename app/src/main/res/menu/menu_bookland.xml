@@ -7,12 +7,6 @@
     <item android:id="@+id/itmEditFavAuthors"
         android:title="@string/txt_edit_fave_authors"
         app:showAsAction="never"/>
-    <item android:id="@+id/itmRecommendations"
-        android:title="@string/txt_recommendations"
-        app:showAsAction="never"/>
-    <item android:id="@+id/itmAdvancedSearch"
-        android:title="@string/txt_search"
-        app:showAsAction="never"/>
     <item android:id="@+id/itmNewBookRequest"
         android:title="@string/txt_new_book_request"
         app:showAsAction="never"/>
@@ -21,11 +15,11 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/itmSimpleSearch"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_search_white_24dp"
         android:title="@string/txt_search"
+        android:iconTint="@color/white"
         app:showAsAction="ifRoom"
         app:actionViewClass="android.widget.SearchView"/>
-
     <item android:id="@+id/itmExit"
         android:title="@string/txt_exit"
         app:showAsAction="never"/>

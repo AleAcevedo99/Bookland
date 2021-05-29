@@ -59,7 +59,7 @@ class AboutUsActivity : AppCompatActivity() {
         val location: Location? = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
         val longitude: Double = location?.getLongitude() ?: 0.0
         val latitude: Double = location?.getLatitude() ?: 0.0
-        var intent = Intent(Intent.ACTION_VIEW).apply { data= Uri.parse( "geo:${latitude}, ${longitude}?z=18 &q${latitude}, ${longitude} &q=19.3126883,-99.1723803") }
+        var intent = Intent(Intent.ACTION_VIEW).apply { data= Uri.parse( "https://www.google.com/maps/dir/?api=1&origin=$latitude, $longitude&destination=19.291342800380818, -99.13927255055891") }
 
         if(intent.resolveActivity(packageManager) != null){
             startActivity(intent)

@@ -36,7 +36,7 @@ class FavoriteGendersActivity : AppCompatActivity() {
 
         binding.btnOk.setOnClickListener {
 
-            val intent = Intent(this@FavoriteGendersActivity, HomeActivity::class.java).apply{
+            val intent = Intent(this@FavoriteGendersActivity, MainActivity::class.java).apply{
                 putExtra(Constants.ID_USER, idUser)
             }
             startActivity(intent)

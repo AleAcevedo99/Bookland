@@ -19,6 +19,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="5dp"
+            android:textSize="16sp"
             android:text="@string/txt_about_us"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:text="@string/txt_know_our_sucursal"
+            android:background="@color/primary_btn"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />

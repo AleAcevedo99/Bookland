@@ -1,6 +1,5 @@
 package com.example.bookland
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +15,6 @@ import com.example.bookland.Constants.Constants
 import com.example.bookland.Entity.EntityBooks
 import com.example.bookland.Entity.EntityFilter
 import com.example.bookland.Entity.ListFilters
-import com.example.bookland.databinding.ActivityAdvancedSearchBinding
 import com.example.bookland.databinding.ActivityAdvancedSearchResultsBinding
 import org.json.JSONObject
 import java.util.*
@@ -38,12 +36,7 @@ class AdvancedSearchResultsActivity : AppCompatActivity() {
             loadListBooks()
 
             binding.btnFilters.setOnClickListener {
-                val filterSetting = ListFilters().getFilterSetting()
-                Log.d(Constants.LOG_TAG, filterSetting.toString())
-                val intent = Intent(this, AdvancedSearchActivity::class.java).apply{
-                    putExtra(Constants.ID_USER, idUser)
-                }
-                startActivity(intent)
+                super.onBackPressed()
             }
         }else{
             Toast.makeText(this, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
