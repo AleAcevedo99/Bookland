@@ -40,6 +40,7 @@ class BookShelfsActivity : AppCompatActivity() {
         idUser= intent.getLongExtra(Constants.ID_USER, -1)
         idBook = intent.getLongExtra(Constants.ID_BOOK, -1)
         loadBookShelfs(idBook)
+        binding.txvInstructions.text = getString(R.string.txt_shelfs_instructions)
     }
 
     fun loadBookShelfs(idBook:Long){
@@ -54,15 +55,23 @@ class BookShelfsActivity : AppCompatActivity() {
                             binding.txtTitle.setText("${array.getJSONObject(0).getString("title")} - ${array.getJSONObject(0).getString("authorName")}")
 
                             val arrayShelfs = jsonObject.getJSONArray("shelfs")
-                            for(i in 0 until arrayShelfs.length()){
-                                val shelf = EntityCheck()
-                                shelf.id = arrayShelfs.getJSONObject(i).getLong("id")
-                                shelf.name = arrayShelfs.getJSONObject(i).getString("shelfName")
-                                shelf.idFavorite = arrayShelfs.getJSONObject(i).getLong("idBookShelf")
-                                if(arrayShelfs.getJSONObject(i).getInt("isDefaultShelf") == 0){
-                                    list.add(shelf)
+                            if(arrayShelfs.length() > 0){
+                                for(i in 0 until arrayShelfs.length()){
+                                    val shelf = EntityCheck()
+                                    shelf.id = arrayShelfs.getJSONObject(i).getLong("id")
+                                    shelf.name = arrayShelfs.getJSONObject(i).getString("shelfName")
+                                    shelf.idFavorite = arrayShelfs.getJSONObject(i).getLong("idBookShelf")
+                                    if(arrayShelfs.getJSONObject(i).getInt("isDefaultShelf") == 0){
+                                        list.add(shelf)
+                                    }
                                 }
                             }
+
+                            if(list.size == 0){
+                                binding.txvInstructions.text = getString(R.string.txt_add_shelfs_to_see)
+                            }
+
+
 
                             val adapter = CheckAdapter(list, this, 3, idUser, queue, idBook)
 

@@ -54,30 +54,36 @@ class CatalogShelfsAdapter(var shelfsList:ArrayList<EntityShelf>, val context: C
         alert.setView(editText)
         editText.setText(shelfsList[position].shelfName)
         alert.setPositiveButton(R.string.txt_ok) { _, _ ->
-            val jsonBody = JSONObject()
-            jsonBody.put("id", shelfsList[position].id)
-            jsonBody.put("idUser", shelfsList[position].idUser)
-            jsonBody.put("shelfName", editText.text.toString())
-            val jsonObjectRequest = JsonObjectRequest(
-                    Request.Method.PUT, Constants.URL_API + "Shelfs",jsonBody,
-                    Response.Listener { response ->
-                        if(response["code"].toString().toInt() >= 1){
-                            shelfsList[position].shelfName =  editText.text.toString()
-                            Toast.makeText(context, R.string.txt_successful_message, Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(context, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
-                        }
-                        notifyDataSetChanged()
-                    },
-                    Response.ErrorListener { error ->
-                        if(error.networkResponse.statusCode == 406){
-                            Toast.makeText(context, R.string.txt_name_cannot_be_repeated, Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(context, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
-                        }
-                        notifyDataSetChanged()
-                    })
-            queue.add(jsonObjectRequest)
+            if(!editText.text.toString().trim().isEmpty()){
+                val jsonBody = JSONObject()
+                jsonBody.put("id", shelfsList[position].id)
+                jsonBody.put("idUser", shelfsList[position].idUser)
+                jsonBody.put("shelfName", editText.text.toString())
+                val jsonObjectRequest = JsonObjectRequest(
+                        Request.Method.PUT, Constants.URL_API + "Shelfs",jsonBody,
+                        Response.Listener { response ->
+                            if(response["code"].toString().toInt() >= 1){
+                                shelfsList[position].shelfName =  editText.text.toString()
+                                Toast.makeText(context, R.string.txt_successful_message, Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(context, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
+                            }
+                            notifyDataSetChanged()
+                        },
+                        Response.ErrorListener { error ->
+                            if(error.networkResponse.statusCode == 406){
+                                Toast.makeText(context, R.string.txt_name_cannot_be_repeated, Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(context, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
+                            }
+                            notifyDataSetChanged()
+                        })
+                queue.add(jsonObjectRequest)
+            }else{
+                Toast.makeText(context, R.string.txt_enter_name, Toast.LENGTH_LONG).show()
+                actionDialog(position).show()
+            }
+
 
 
         }

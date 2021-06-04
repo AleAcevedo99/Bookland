@@ -30,12 +30,12 @@
     <string name="txt_new_shelf">Nuevo librero</string>
     <string name="txt_ok">Guardar</string>
     <string name="txt_cancel">Cancelar</string>
-    <string name="txt_email_cannot_be_repeated">Ya existe un usario con el email ingresado</string>
+    <string name="txt_email_cannot_be_repeated">Ya existe un usuario con el email ingresado</string>
     <string name="txt_user_registered">Usuario registrado</string>
     <string name="txt_my_authors_instructions">Seleccione sus autores favoritos</string>
     <string name="txt_author">Autor</string>
     <string name="txt_successful_message">Operación exitosa</string>
-    <string name="txt_wirte_an_autor">Ingrese un autor</string>
+    <string name="txt_wirte_an_autor">Ingrese el nombre de un autor</string>
     <string name="txt_edit_fave_authors">Configuración de favoritos</string>
     <string name="txt_btn_next">Siguiente</string>
     <string name="txt_avg">Promedio</string>
@@ -45,7 +45,7 @@
     <string name="txt_tags">Tags</string>
     <string name="txt_no_recommendations">No tenemos recomendaciones para ti de momento</string>
     <string name="txt_configure_fav_genders">Configura tus \"Favoritos\" para poder obtener recomendaciones</string>
-    <string name="txt_yes">Ok</string>
+    <string name="txt_yes">OK</string>
     <string name="txt_name_cannot_be_repeated">El nombre del librero no puede repetirse</string>
     <string name="txt_would_like_to_do">¿Qué desea hacer?</string>
     <string name="txt_delete_shelfs">Eliminar</string>
@@ -85,7 +85,11 @@
     <string name="txt_yes_string">Sí</string>
     <string name="txt_saga">Ver saga</string>
     <string name="txt_error_request">Ocurrió un problema al cargar los resultados</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_advanced_search">Búsqueda avanzada</string>
+    <string name="txt_request_book_add">Solicitar agregar un nuevo libro</string>
+    <string name="txt_email_text">Hola, quisiera que agregaran a la aplicación el libro…</string>
+    <string name="txt_add_shelfs_to_see">Crea tus libreros en \"Editar Liberos"\ para poder usar esta sección</string>
+    <string name="txt_enter_name">Ingrese el nombre del librero</string>
+    <string name="txt_no_books_in_shelf">No tienes ningún libro agregado en este librero</string>
 </resources>

@@ -100,28 +100,34 @@ class CatalogShelfsActivity : AppCompatActivity() {
         alert.setView(editText)
 
         alert.setPositiveButton(R.string.txt_ok) { _, _ ->
-            val jsonBody = JSONObject()
-            jsonBody.put("idUser", idUser)
-            jsonBody.put("shelfName", editText.text.toString())
-            val jsonObjectRequest = JsonObjectRequest(
-                    Request.Method.POST, Constants.URL_API + "Shelfs",jsonBody,
-                    Response.Listener { response ->
-                        if(response["code"].toString().toInt() >= 1){
-                            Toast.makeText(this, R.string.txt_successful_message, Toast.LENGTH_SHORT).show()
-                            loadMyShelfsList()
-                        }else{
-                            Toast.makeText(this, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
-                        }
+            if(!editText.text.toString().isEmpty()){
+                val jsonBody = JSONObject()
+                jsonBody.put("idUser", idUser)
+                jsonBody.put("shelfName", editText.text.toString())
+                val jsonObjectRequest = JsonObjectRequest(
+                        Request.Method.POST, Constants.URL_API + "Shelfs",jsonBody,
+                        Response.Listener { response ->
+                            if(response["code"].toString().toInt() >= 1){
+                                Toast.makeText(this, R.string.txt_successful_message, Toast.LENGTH_SHORT).show()
+                                loadMyShelfsList()
+                            }else{
+                                Toast.makeText(this, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
+                            }
 
-                    },
-                    Response.ErrorListener { error ->
-                        if(error.networkResponse.statusCode == 406){
-                            Toast.makeText(this, R.string.txt_name_cannot_be_repeated, Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(this, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
-                        }
-                    })
-            queue.add(jsonObjectRequest)
+                        },
+                        Response.ErrorListener { error ->
+                            if(error.networkResponse.statusCode == 406){
+                                Toast.makeText(this, R.string.txt_name_cannot_be_repeated, Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(this, R.string.txt_transaction_error, Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                queue.add(jsonObjectRequest)
+            }else{
+                Toast.makeText(this, R.string.txt_enter_name, Toast.LENGTH_LONG).show()
+                actionDialog().show()
+            }
+
 
 
         }

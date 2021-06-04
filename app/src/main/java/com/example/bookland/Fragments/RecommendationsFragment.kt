@@ -1,5 +1,6 @@
 package com.example.bookland.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.Volley
 import com.example.bookland.Adapters.RecommendationsAdapter
 import com.example.bookland.Constants.Constants
 import com.example.bookland.Entity.EntityGender
+import com.example.bookland.MainActivity
 import com.example.bookland.R
 import com.example.bookland.databinding.FragmentHomeBinding
 import com.example.bookland.databinding.FragmentRecommendationsBinding
@@ -53,6 +55,16 @@ class RecommendationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadMyGendersList()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         loadMyGendersList()
     }
 
@@ -100,10 +112,13 @@ class RecommendationsFragment : Fragment() {
         alert.setMessage(R.string.txt_configure_fav_genders)
 
         alert.setPositiveButton(R.string.txt_yes){ _, _ ->
-
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
         }
         return  alert.create()
     }
+
+
 
     companion object {
         @JvmStatic

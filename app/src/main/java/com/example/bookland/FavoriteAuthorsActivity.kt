@@ -69,6 +69,8 @@ class FavoriteAuthorsActivity : AppCompatActivity() {
                         element.idFavorite = array.getJSONObject(i).getLong("isFavorite")
                         list.add(element)
                     }
+                }else{
+                    Toast.makeText(this, R.string.txt_no_coincidences, Toast.LENGTH_SHORT).show()
                 }
                 val adapter = CheckAdapter(list, this, 1, idUser, queue, 0)
                 val linearLayout = LinearLayoutManager(

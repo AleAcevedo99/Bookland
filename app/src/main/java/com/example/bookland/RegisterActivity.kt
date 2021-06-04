@@ -98,9 +98,9 @@ class RegisterActivity : AppCompatActivity() {
                         Response.ErrorListener { error ->
                             Log.d(Constants.LOG_TAG, error.toString())
                             if(error.networkResponse.statusCode == 406){
-                                Snackbar.make(it, R.string.txt_email_cannot_be_repeated,Snackbar.LENGTH_SHORT).show()
+                                Toast.makeText(this, R.string.txt_email_cannot_be_repeated,Toast.LENGTH_SHORT).show()
                             }else{
-                                Snackbar.make(it, R.string.txt_transaction_error,Snackbar.LENGTH_SHORT).show()
+                                Toast.makeText(this, R.string.txt_transaction_error,Toast.LENGTH_SHORT).show()
                             }
                         })
                 queue.add(jsonObjectRequest)

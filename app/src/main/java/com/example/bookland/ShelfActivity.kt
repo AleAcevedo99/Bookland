@@ -69,7 +69,6 @@ class ShelfActivity : AppCompatActivity() {
         }else if(type == 3){
             //saga
             idSaga = intent.getLongExtra(Constants.ID_SAGA, -1)
-            Log.d(Constants.LOG_TAG, "IdSaga $idSaga")
             if(idSaga > 0){
                 loadBooksSaga()
             }else{
@@ -105,13 +104,15 @@ class ShelfActivity : AppCompatActivity() {
                             list.add(book)
                         }
 
-                        val adapter = BooksAdapter(list, this@ShelfActivity, idUser)
-
-                        val linearLayout = LinearLayoutManager(this@ShelfActivity, LinearLayoutManager.VERTICAL,
-                                false)
-                        binding.rvMyBooksShelf.layoutManager = linearLayout
-                        binding.rvMyBooksShelf.adapter = adapter
+                    }else{
+                        actionDialog(getString(R.string.txt_no_books_in_shelf)).show()
                     }
+                    val adapter = BooksAdapter(list, this@ShelfActivity, idUser)
+
+                    val linearLayout = LinearLayoutManager(this@ShelfActivity, LinearLayoutManager.VERTICAL,
+                            false)
+                    binding.rvMyBooksShelf.layoutManager = linearLayout
+                    binding.rvMyBooksShelf.adapter = adapter
                 },
                 Response.ErrorListener { error ->
                     Toast.makeText(this, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()
@@ -163,7 +164,7 @@ class ShelfActivity : AppCompatActivity() {
                         binding.rvMyBooksShelf.adapter = adapter
 
                     }else{
-                        actionDialog().show()
+                        actionDialog(getString(R.string.txt_no_recommendations)).show()
                     }
                 },
                 Response.ErrorListener { error ->
@@ -251,13 +252,13 @@ class ShelfActivity : AppCompatActivity() {
         }
     }
 
-    fun actionDialog(): AlertDialog {
+    fun actionDialog(message:String): AlertDialog {
         val alert = AlertDialog.Builder(this)
         alert.setTitle(R.string.app_name)
-        alert.setMessage(R.string.txt_no_recommendations)
+        alert.setMessage(message)
 
         alert.setPositiveButton(R.string.txt_yes){_,_ ->
-
+            finish()
         }
         return  alert.create()
     }

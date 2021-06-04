@@ -1,14 +1,14 @@
 package com.example.bookland
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.SearchView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var previewMenuItem: MenuItem
     private var idUser: Long = -1
+    private var currentPositionMenu = 0
+    private var currentMenuSelected = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,10 +56,11 @@ class MainActivity : AppCompatActivity() {
         val searchItem = menu?.findItem(R.id.itmSimpleSearch)
         if(searchItem != null){
             val searchView = searchItem.actionView as SearchView
-
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if(!query.isNullOrEmpty()){
+                        currentMenuSelected =  binding.navigationView.selectedItemId
+                        currentPositionMenu =  binding.viewPager.currentItem
                         val menuAdapter = com.example.bookland.Adapters.MenuAdapter(arrayListOf(SearchFragment.newInstance(idUser, query)),
                                 supportFragmentManager)
                         binding.viewPager.adapter = menuAdapter
@@ -76,6 +79,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onClose(): Boolean {
                     searchView.onActionViewCollapsed()
                     configureSlideMenu()
+                    binding.navigationView.selectedItemId = currentMenuSelected
+                    currentPositionMenu =  binding.viewPager.currentItem
                     return true
                 }
 
@@ -120,15 +125,15 @@ class MainActivity : AppCompatActivity() {
                 var intent = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
                     putExtra(Intent.EXTRA_EMAIL, emails)
-                    putExtra(Intent.EXTRA_SUBJECT, "Solicitar agregar un nuevo libro")
-                    putExtra(Intent.EXTRA_TEXT, "Hola, quisiera que agregaran a la aplicación el libro ...")
+                    putExtra(Intent.EXTRA_SUBJECT, getString(R.string.txt_request_book_add))
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.txt_email_text))
                 }
 
                 if(intent.resolveActivity(packageManager) != null){
                     startActivity(intent)
                 }
                 else{
-                    Toast.makeText(this, "No tienes una app para abrir esta opción",
+                    Toast.makeText(this, getString(R.string.txt_no_app),
                             Toast.LENGTH_LONG).show()
                 }
             }
@@ -136,11 +141,6 @@ class MainActivity : AppCompatActivity() {
 
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        configureSlideMenu()
     }
 
     fun configureSlideMenu(){

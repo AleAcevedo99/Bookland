@@ -86,6 +86,7 @@ class AdvancedSearchResultsActivity : AppCompatActivity() {
                     }else{
                         Toast.makeText(this, R.string.txt_no_coincidences,
                                 Toast.LENGTH_LONG).show()
+                        finish()
                     }
                     val adapter = BooksAdapter(list, this, idUser)
 

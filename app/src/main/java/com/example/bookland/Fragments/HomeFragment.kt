@@ -1,6 +1,8 @@
 package com.example.bookland.Fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,38 +53,47 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //loadMyShelfsList()
+    }
+
+    override fun onResume() {
+        super.onResume()
         loadMyShelfsList()
     }
+
 
     fun loadMyShelfsList(){
         val list = arrayListOf<EntityShelf>()
         val stringRequest = StringRequest(
             Request.Method.GET, "$url/$idUser",
             Response.Listener<String> { response ->
-                val jsonObject = JSONObject(response)
-                if(jsonObject["code"] == 1) {
-                    val array = jsonObject.getJSONArray("shelfs")
-                    for(i in 0 until array.length()){
-                        val myNew = EntityShelf()
-                        myNew.id = array.getJSONObject(i).getLong("id")
-                        myNew.shelfName = array.getJSONObject(i).getString("shelfName")
-                        myNew.idUser = array.getJSONObject(i).getLong("idUser")
-                        myNew.count = array.getJSONObject(i).getInt("shelfCount")
-                        myNew.isDefault = array.getJSONObject(i).getInt("isDefaultShelf")
-                        if(myNew.isDefault == 1){
-                            myNew.shelfName = getString(R.string.txt_default_shelf)
+                if(context != null){
+                    val jsonObject = JSONObject(response)
+                    if(jsonObject["code"] == 1) {
+                        val array = jsonObject.getJSONArray("shelfs")
+                        for(i in 0 until array.length()){
+                            val myNew = EntityShelf()
+                            myNew.id = array.getJSONObject(i).getLong("id")
+                            myNew.shelfName = array.getJSONObject(i).getString("shelfName")
+                            myNew.idUser = array.getJSONObject(i).getLong("idUser")
+                            myNew.count = array.getJSONObject(i).getInt("shelfCount")
+                            myNew.isDefault = array.getJSONObject(i).getInt("isDefaultShelf")
+                            if(myNew.isDefault == 1){
+                                myNew.shelfName = getString(R.string.txt_default_shelf)
+                            }
+                            list.add(myNew)
                         }
-                        list.add(myNew)
+                        val adapter = MyShelfsAdapter(list, context!!)
+
+                        val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,
+                                false)
+                        binding.rvMyShelfs.layoutManager = linearLayout
+                        binding.rvMyShelfs.adapter = adapter
+
+
                     }
-                    val adapter = MyShelfsAdapter(list, context!!)
-
-                    val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,
-                        false)
-                    binding.rvMyShelfs.layoutManager = linearLayout
-                    binding.rvMyShelfs.adapter = adapter
-
-
                 }
+
             },
             Response.ErrorListener { error ->
                 Toast.makeText(context, R.string.txt_error_load_activity, Toast.LENGTH_SHORT).show()

@@ -1,5 +1,6 @@
 package com.example.bookland.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -57,12 +58,13 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(search != ""){
-            loadBooksSearch(search)
-        }else{
-            Toast.makeText(context, R.string.txt_error_request, Toast.LENGTH_SHORT).show()
+        if(context != null){
+            if(search != ""){
+                loadBooksSearch(search)
+            }else{
+                Toast.makeText(context, R.string.txt_error_request, Toast.LENGTH_SHORT).show()
+            }
         }
-
 
     }
 
@@ -91,13 +93,16 @@ class SearchFragment : Fragment() {
                             list.add(book)
                         }
 
-                        val adapter = BooksAdapter(list, context!!, idUser)
-
-                        val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,
-                                false)
-                        binding.rvBooksSearch.layoutManager = linearLayout
-                        binding.rvBooksSearch.adapter = adapter
+                    }else{
+                        Toast.makeText(context, R.string.txt_no_coincidences, Toast.LENGTH_SHORT).show()
                     }
+
+                    val adapter = BooksAdapter(list, context!!, idUser)
+
+                    val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,
+                            false)
+                    binding.rvBooksSearch.layoutManager = linearLayout
+                    binding.rvBooksSearch.adapter = adapter
                 },
                 Response.ErrorListener { error ->
                     Toast.makeText(context, R.string.txt_error_request, Toast.LENGTH_SHORT).show()

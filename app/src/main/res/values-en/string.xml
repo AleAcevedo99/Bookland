@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bookland</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_btn_ok">Ok</string>
+    <string name="txt_birth_date">Birth date</string>
+    <string name="txt_sex">Sex</string>
+    <string name="txt_woman">Female</string>
+    <string name="txt_men">Male</string>
+    <string name="txt_next">Next</string>
+    <string name="txt_create_account">Create account</string>
+    <string name="txt_edit_shelfs">Edit shelves</string>
+    <string name="txt_edit_profile">Edit profile</string>
+    <string name="txt_exit">Exit</string>
+    <string name="txt_my_genders">My genders</string>
+    <string name="txt_my_genders_instructions">Select the genders from which you wish to get recommendations</string>
+    <string name="txt_home">My books</string>
+    <string name="txt_want_to_read">Want to read</string>
+    <string name="txt_not_interested">Not interested</string>
+    <string name="txt_btn_save">Save</string>
+    <string name="txt_btn_see_more">See more</string>
+    <string name="txt_my_authors">My favorite authors</string>
+    <string name="txt_transaction_error">Transaction error</string>
+    <string name="txt_all_fields_required">All fields are required</string>
+    <string name="txt_error_load_activity">Failed to load activity</string>
+    <string name="txt_error_password">Invalid password</string>
+    <string name="txt_error_user">Invalid user</string>
+    <string name="txt_recommendations">Recommendations</string>
+    <string name="txt_shelfs">Shelves</string>
+    <string name="txt_new_shelf">New shelf</string>
+    <string name="txt_ok">Save</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_email_cannot_be_repeated">Email already exists</string>
+    <string name="txt_user_registered">User registered</string>
+    <string name="txt_my_authors_instructions">Select your favorite authors</string>
+    <string name="txt_author">Author</string>
+    <string name="txt_successful_message">Successful transaction</string>
+    <string name="txt_wirte_an_autor">Write an author name</string>
+    <string name="txt_edit_fave_authors">Favorites configuration</string>
+    <string name="txt_btn_next">Next</string>
+    <string name="txt_avg">Avrage</string>
+    <string name="txt_page_number">Page number</string>
+    <string name="txt_narrating">Narrating</string>
+    <string name="txt_pov">Multiple POV</string>
+    <string name="txt_tags">Tags</string>
+    <string name="txt_no_recommendations">We don\'t have recommendations gor you at the moment</string>
+    <string name="txt_configure_fav_genders">Configure your \"Favorites\" to get recommendations</string>
+    <string name="txt_yes">OK</string>
+    <string name="txt_name_cannot_be_repeated">The name of the shelf can\'t be repeated</string>
+    <string name="txt_would_like_to_do">What would you like to do?</string>
+    <string name="txt_delete_shelfs">Delete</string>
+    <string name="txt_edit">Edit</string>
+    <string name="txt_book_shelfs">Shelfs</string>
+    <string name="txt_shelfs_instructions">Select the shelves you want the book to belong to</string>
+    <string name="txt_default_shelf">Read</string>
+    <string name="txt_you_need_internet">You don\'t have internet access. Connection is required to use the app.</string>
+    <string name="hint_min">Minimum</string>
+    <string name="hint_max">Maximum</string>
+    <string name="txt_gender">Gender</string>
+    <string name="txt_subgender">Subgender</string>
+    <string name="txt_multiple_pov">Multiple POV</string>
+    <string name="txt_target_age">Type</string>
+    <string name="txt_first_person">First person</string>
+    <string name="txt_third_person">Third person</string>
+    <string name="txt_select">Select</string>
+    <string name="txt_children">Children</string>
+    <string name="txt_ya">Young Adult</string>
+    <string name="txt_na">New Adult</string>
+    <string name="txt_adult">Adult</string>
+    <string name="txt_search">Search</string>
+    <string name="txt_clean">Clean filters</string>
+    <string name="txt_new_book_request">Request to add a book</string>
+    <string name="txt_no_coincidences">No results</string>
+    <string name="txt_about_us">Bookland allows you to manage the books you read and get recommendations
+    customized according to your preferences. You can manage the books you read or want to read by creating
+    a shelf and adding all the books you want to it. They can put a book in as many shelves as you want.
+    In the recommendations section you will find the genres that you have marked as favorites and we will give you suggestions
+    based on them. If you are looking for a book with certain features, try our advanced search.
+    Enjoy the App:)</string>
+    <string name="txt_know_our_sucursal">Know our offices</string>
+    <string name="txt_need_permission">You must accpet the permission to perform this action</string>
+    <string name="txt_no_app">You do not have an application to perform this action</string>
+    <string name="txt_title_about_us">About us</string>
+    <string name="txt_no">No</string>
+    <string name="txt_yes_string">Yes</string>
+    <string name="txt_saga">See saga</string>
+    <string name="txt_error_request">There was a problem loading the results</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_advanced_search">Advanced search</string>
+    <string name="txt_request_book_add">Request new book addtiion</string>
+    <string name="txt_email_text">Hello, I would like it for you to add the book…</string>
+    <string name="txt_add_shelfs_to_see">Create your shelfs in \"Edit Shelves"\ to use this section</string>
+    <string name="txt_enter_name">Enter the shelf name</string>
+    <string name="txt_no_books_in_shelf">You have no books added to this shelf</string>
+</resources>
